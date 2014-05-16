@@ -207,19 +207,6 @@ buttons = [
    Button(( 90,260, 60, 60), bg='call',    cb=numericCallback, value=12)],
   # Screen 1 for numeric input
   [Button(( 30,  0,320, 60), bg='box'),
-   Button(( 30, 60, 60, 60), bg='1',     cb=numericCallback, value=1),
-   Button(( 90, 60, 60, 60), bg='2',     cb=numericCallback, value=2),
-   Button((150, 60, 60, 60), bg='3',     cb=numericCallback, value=3),
-   Button(( 30,110, 60, 60), bg='4',     cb=numericCallback, value=4),
-   Button(( 90,110, 60, 60), bg='5',     cb=numericCallback, value=5),
-   Button((150,110, 60, 60), bg='6',     cb=numericCallback, value=6),
-   Button(( 30,160, 60, 60), bg='7',     cb=numericCallback, value=7),
-   Button(( 90,160, 60, 60), bg='8',     cb=numericCallback, value=8),
-   Button((150,160, 60, 60), bg='9',     cb=numericCallback, value=9),
-   Button(( 30,210, 60, 60), bg='star',  cb=numericCallback, value=0),
-   Button(( 90,210, 60, 60), bg='0',     cb=numericCallback, value=0),
-   Button((150,210, 60, 60), bg='hash',  cb=numericCallback, value=0),
-   Button((180,260, 60, 60), bg='del2',  cb=numericCallback, value=10),
    Button(( 90,260, 60, 60), bg='hang',    cb=numericCallback, value=12)]
 ]
 
@@ -333,7 +320,7 @@ while(True):
     #if screenMode >= 1 or screenMode != screenModePrior: break
     if screen_change == 1 or screenMode != screenModePrior: break
 
-  if img is None or img.get_height() < 240: # Letterbox, clear background
+  if img is None or img.get_height() < 240: 
     screen.fill(0)
   if img:
     screen.blit(img,
@@ -343,10 +330,17 @@ while(True):
   # Overlay buttons on display and update
   for i,b in enumerate(buttons[screenMode]):
     b.draw(screen)
-  if screenMode == 0 or screenMode == 1:
+  if screenMode == 0 :
     myfont = pygame.font.SysFont("Arial", 40)
     label = myfont.render(numberstring, 1, (255,255,255))
     screen.blit(label, (10, 2))
+  else:
+    myfont = pygame.font.SysFont("Arial", 35)
+    label = myfont.render("Calling", 1, (255,255,255))
+    screen.blit(label, (10, 80))
+    myfont = pygame.font.SysFont("Arial", 35)
+    label = myfont.render(numberstring + "...", 1, (255,255,255))
+    screen.blit(label, (10, 120))
 
   pygame.display.update()
 
